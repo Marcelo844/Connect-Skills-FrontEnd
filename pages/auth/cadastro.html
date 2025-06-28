@@ -38,7 +38,7 @@
 
     <!-- FORMULÁRIO DE CADASTRO -->
     <div class="card shadow p-4 w-100 d-none" id="formularioCadastro" style="max-width: 400px;">
-      <form id="formCadastro" method="POST" action="/usuarios/cadastrar">
+      <form id="formCadastro">
         <!-- Campo oculto com o tipo correto (empresa ou candidato) -->
         <input type="hidden" name="tipo" id="tipoHidden">
 
@@ -100,16 +100,16 @@
   const tipoHidden = document.getElementById('tipoHidden');
 
   radioFisica.addEventListener('change', () => {
-    tipoHidden.value = 'candidato'; // valor aceito pelo ENUM no banco
+    tipoHidden.value = 'candidato';
     formContainer.classList.remove('d-none');
   });
 
   radioJuridica.addEventListener('change', () => {
-    tipoHidden.value = 'empresa'; // valor aceito pelo ENUM no banco
+    tipoHidden.value = 'empresa';
     formContainer.classList.remove('d-none');
   });
 
-  // Botão de exibir/ocultar senha
+  // Botões de visualização de senha
   document.getElementById("toggleSenha").addEventListener("click", function () {
     const senhaInput = document.getElementById("senha");
     const icon = document.getElementById("iconSenha");
@@ -125,7 +125,23 @@
     icon.classList.toggle("bi-eye");
     icon.classList.toggle("bi-eye-slash");
   });
+
+  // Interceptar submit para redirecionamento
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Evita envio padrão do form
+
+    const tipo = tipoHidden.value;
+
+    if (tipo === 'candidato') {
+      window.location.href = '/pages/candidatos/cadastro-de-nome-e-sobrenome-candidatos.html';
+    } else if (tipo === 'empresa') {
+      window.location.href = '/pages/empresas/nome-empresa.html';
+    } else {
+      alert('Por favor, selecione o tipo de pessoa.');
+    }
+  });
 </script>
+
 <script src="/js/shared/confirmarSenha.js"></script>
 </body>
 </html>

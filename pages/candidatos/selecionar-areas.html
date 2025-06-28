@@ -24,19 +24,34 @@
 
     <h2 class="mb-4">Selecione a seguir três áreas a quais você deseja trabalhar:</h5>
     <form action="/candidato/areas" method="POST" id="formAreas">
-      <div id="botoes" class="d-flex flex-wrap justify-content-center">
-        <% const opcoes = [
-          "Administração", "Agropecuária / Agricultura", "Comunicação / Jornalismo", "Construção Civil", "Design / Criação",
-          "Educação / Ensino", "Engenharia", "Eventos / Produção Cultural", "Finanças / Contabilidade", "Gastronomia / Alimentação",
-          "Hotelaria / Turismo", "Jurídico", "Logística", "Marketing", "Mecânica / Manutenção",
-          "Moda / Estilo", "Meio Ambiente", "Produção / Operacional", "Recursos Humanos (RH)", "Saúde",
-          "Segurança / Vigilância", "Transporte / Motorista", "Tecnologia da Informação"
-        ]; %>
+<div class="container text-center my-4">
+  <div class="d-flex flex-wrap justify-content-center gap-2">
+    <button type="button" class="btn btn-outline-primary">Administração</button>
+    <button type="button" class="btn btn-outline-primary">Agropecuária / Agricultura</button>
+    <button type="button" class="btn btn-outline-primary">Comunicação / Jornalismo</button>
+    <button type="button" class="btn btn-outline-primary">Construção Civil</button>
+    <button type="button" class="btn btn-outline-primary">Design / Criação</button>
+    <button type="button" class="btn btn-outline-primary">Educação / Ensino</button>
+    <button type="button" class="btn btn-outline-primary">Engenharia</button>
+    <button type="button" class="btn btn-outline-primary">Eventos / Produção Cultural</button>
+    <button type="button" class="btn btn-outline-primary">Finanças / Contabilidade</button>
+    <button type="button" class="btn btn-outline-primary">Gastronomia / Alimentação</button>
+    <button type="button" class="btn btn-outline-primary">Hotelaria / Turismo</button>
+    <button type="button" class="btn btn-outline-primary">Jurídico</button>
+    <button type="button" class="btn btn-outline-primary">Logística</button>
+    <button type="button" class="btn btn-outline-primary">Marketing</button>
+    <button type="button" class="btn btn-outline-primary">Mecânica / Manutenção</button>
+    <button type="button" class="btn btn-outline-primary">Moda / Estilo</button>
+    <button type="button" class="btn btn-outline-primary">Meio Ambiente</button>
+    <button type="button" class="btn btn-outline-primary">Produção / Operacional</button>
+    <button type="button" class="btn btn-outline-primary">Recursos Humanos (RH)</button>
+    <button type="button" class="btn btn-outline-primary">Saúde</button>
+    <button type="button" class="btn btn-outline-primary">Segurança / Vigilância</button>
+    <button type="button" class="btn btn-outline-primary">Transporte / Motorista</button>
+    <button type="button" class="btn btn-outline-primary">Tecnologia da Informação</button>
+  </div>
+</div>
 
-        <% opcoes.forEach((opcao, index) => { %>
-          <button type="button" class="area-btn" data-value="<%= opcao %>"><%= opcao %></button>
-        <% }) %>
-      </div>
 
       <input type="hidden" name="areasSelecionadas" id="areasSelecionadas">
       <div class="mt-4">

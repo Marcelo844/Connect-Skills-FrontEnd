@@ -10,13 +10,18 @@
   <link rel="stylesheet" href="/css/shared/localizacao-login.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-<nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/"> 
-            <img src="/img/logo.png" class="logo-header" alt="Logo Header">
-          </a>
-        </div>
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"> 
+      <img src="/img/logo.png" class="logo-header" alt="Logo Header">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
 </nav>
+
   <!-- CONTEÚDO -->
   <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center text-center px-3">
     <h1 class="mb-4 fs-2">Para saber as melhores oportunidades, digite sua região:</h1>
@@ -32,7 +37,7 @@
           </div>
             <button type="button" class="btn btn-outline-secondary mt-2 w-100 text-center" id="btnLocalizacao">
               <i class="bi bi-geo-alt-fill me-2"></i> Usar minha localização
-              </button>
+            </button>
 
         <button type="button" class="btn btn-link mt-2 w-100 text-center text-decoration-none d-none" id="btnEditarLocal">
           <i class="bi bi-pencil-fill me-2"></i> Editar localização
@@ -43,13 +48,13 @@
           </div>
         </div>
         <div class="d-grid">
-          <button type="submit" class="btn btn-primary">Continuar</button>
+            <a href="/pages/candidatos/telefone.html" class="btn btn-primary">Continuar</a>
         </div>
       </form>
     </div>
   </main>
 
-  <footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
+  <footer class="p-3 text-center bg-primary text-white mt-5">
       <div class="container">
           <p class="mb-0">Connect Skills &copy; 2025</p>
           <p>Todos os direitos reservados.</p>
