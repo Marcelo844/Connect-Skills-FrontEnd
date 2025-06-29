@@ -99,6 +99,11 @@
   const formContainer = document.getElementById('formularioCadastro');
   const tipoHidden = document.getElementById('tipoHidden');
 
+  const senha = document.getElementById('senha');
+  const confirmarSenha = document.getElementById('confirmarSenha');
+  const erroSenha = document.getElementById('erro-senha');
+  const erroRequisitos = document.getElementById('erro-senha-requisitos');
+
   radioFisica.addEventListener('change', () => {
     tipoHidden.value = 'candidato';
     formContainer.classList.remove('d-none');
@@ -109,29 +114,49 @@
     formContainer.classList.remove('d-none');
   });
 
-  // Botões de visualização de senha
+  // Alternar visibilidade da senha
   document.getElementById("toggleSenha").addEventListener("click", function () {
-    const senhaInput = document.getElementById("senha");
-    const icon = document.getElementById("iconSenha");
-    senhaInput.type = senhaInput.type === "password" ? "text" : "password";
-    icon.classList.toggle("bi-eye");
-    icon.classList.toggle("bi-eye-slash");
+    senha.type = senha.type === "password" ? "text" : "password";
+    document.getElementById("iconSenha").classList.toggle("bi-eye");
+    document.getElementById("iconSenha").classList.toggle("bi-eye-slash");
   });
 
   document.getElementById("toggleConfirmar").addEventListener("click", function () {
-    const confirmarInput = document.getElementById("confirmarSenha");
-    const icon = document.getElementById("iconConfirmar");
-    confirmarInput.type = confirmarInput.type === "password" ? "text" : "password";
-    icon.classList.toggle("bi-eye");
-    icon.classList.toggle("bi-eye-slash");
+    confirmarSenha.type = confirmarSenha.type === "password" ? "text" : "password";
+    document.getElementById("iconConfirmar").classList.toggle("bi-eye");
+    document.getElementById("iconConfirmar").classList.toggle("bi-eye-slash");
   });
 
-  // Interceptar submit para redirecionamento
   form.addEventListener('submit', function (e) {
-    e.preventDefault(); // Evita envio padrão do form
+    e.preventDefault(); // Intercepta o envio do formulário
 
+    // Resetando mensagens
+    senha.classList.remove('is-invalid');
+    confirmarSenha.classList.remove('is-invalid');
+    erroSenha.classList.add('d-none');
+    erroRequisitos.style.display = 'none';
+
+    const senhaValor = senha.value.trim();
+    const confirmarValor = confirmarSenha.value.trim();
+    const senhaValida = senhaValor.length >= 8 && /[^A-Za-z0-9]/.test(senhaValor);
+    let valido = true;
+
+    if (!senhaValida) {
+      senha.classList.add('is-invalid');
+      erroRequisitos.style.display = 'block';
+      valido = false;
+    }
+
+    if (senhaValor !== confirmarValor) {
+      confirmarSenha.classList.add('is-invalid');
+      erroSenha.classList.remove('d-none');
+      valido = false;
+    }
+
+    if (!valido) return;
+
+    // Redirecionamento conforme o tipo
     const tipo = tipoHidden.value;
-
     if (tipo === 'candidato') {
       window.location.href = '/pages/candidatos/cadastro-de-nome-e-sobrenome-candidatos.html';
     } else if (tipo === 'empresa') {
@@ -141,7 +166,5 @@
     }
   });
 </script>
-
-<script src="/js/shared/confirmarSenha.js"></script>
 </body>
 </html>

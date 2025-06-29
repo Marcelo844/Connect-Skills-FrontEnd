@@ -1,10 +1,13 @@
-const form = document.querySelector('form');
+const form = document.getElementById('formCadastro');
 const senha = document.getElementById('senha');
 const confirmarSenha = document.getElementById('confirmarSenha');
 const erroSenha = document.getElementById('erro-senha');
 const erroRequisitos = document.getElementById('erro-senha-requisitos');
+const tipoHidden = document.getElementById('tipoHidden');
 
 form.addEventListener('submit', function (e) {
+  e.preventDefault(); // sempre previne primeiro
+
   let valido = true;
 
   senha.classList.remove('is-invalid');
@@ -16,7 +19,6 @@ form.addEventListener('submit', function (e) {
   const confirmarValor = confirmarSenha.value.trim();
   const senhaValida = senhaValor.length >= 8 && /[^A-Za-z0-9]/.test(senhaValor);
 
-  // 👇 Adiciona classe e mostra a mensagem corretamente
   if (!senhaValida) {
     senha.classList.add('is-invalid');
     erroRequisitos.style.display = 'block';
@@ -29,25 +31,15 @@ form.addEventListener('submit', function (e) {
     valido = false;
   }
 
-  if (!valido) e.preventDefault();
+  if (valido) {
+    const tipo = tipoHidden.value;
+
+    if (tipo === 'candidato') {
+      window.location.href = '/pages/candidatos/cadastro-de-nome-e-sobrenome-candidatos.html';
+    } else if (tipo === 'empresa') {
+      window.location.href = '/pages/empresas/nome-empresa.html';
+    } else {
+      alert('Por favor, selecione o tipo de pessoa.');
+    }
+  }
 });
-
-// Alternar visibilidade da senha
-const toggleSenha = document.getElementById('toggleSenha');
-const iconSenha = document.getElementById('iconSenha');
-
-toggleSenha.addEventListener('click', () => {
-  const isText = senha.type === 'text';
-  senha.type = isText ? 'password' : 'text';
-  iconSenha.className = isText ? 'bi bi-eye' : 'bi bi-eye-slash';
-});
-
-const toggleConfirmar = document.getElementById('toggleConfirmar');
-const iconConfirmar = document.getElementById('iconConfirmar');
-
-toggleConfirmar.addEventListener('click', () => {
-  const isText = confirmarSenha.type === 'text';
-  confirmarSenha.type = isText ? 'password' : 'text';
-  iconConfirmar.className = isText ? 'bi bi-eye' : 'bi bi-eye-slash';
-});
-
