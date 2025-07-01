@@ -17,14 +17,14 @@
           </a>
         </div>
 </nav>
+
   <main class="d-flex flex-column align-items-center justify-content-center px-3 text-center pt-5">
     <img src="/img/avatar.png" alt="Avatar provisório" width="150" height="150">
     <h3 class="text-center mt-5 mb-3">Adicione uma foto de perfil</h3>
 
-
     <img src="/img/avatar.png" alt="Prévia da Foto" id="previewFoto" class="foto-icon">
 
-<form action="/candidato/foto" method="POST" id="formFoto" class="text-center">
+    <form action="/candidato/foto" method="POST" id="formFoto" class="text-center">
       <div class="d-flex gap-4 flex-wrap justify-content-center botoes-container" id="opcoesFoto">
         <label class="upload-btn" for="upload">📁 Fazer upload</label>
         <input type="file" id="upload" accept="image/*" class="hidden-input">
@@ -32,23 +32,22 @@
         <button type="button" class="upload-btn" id="tirarFotoBtn">📷 Capturar agora</button>
       </div>
 
-  <video id="video" autoplay playsinline style="display: none;"></video>
-  <canvas id="canvas" style="display: none;"></canvas>
-  <img id="previewFoto" class="rounded-circle mt-3" style="max-width: 200px; display: none;" />
+      <video id="video" autoplay playsinline style="display: none;"></video>
+      <canvas id="canvas" style="display: none;"></canvas>
+      <img id="previewFoto" class="rounded-circle mt-3" style="max-width: 200px; display: none;" />
 
-  <p id="erroFoto" class="text-danger fw-semibold mt-2" style="display: none;">
-    Por favor, selecione ou tire uma foto antes de continuar.
-  </p>
+      <p id="erroFoto" class="text-danger fw-semibold mt-2" style="display: none;">
+        Por favor, selecione ou tire uma foto antes de continuar.
+      </p>
 
-  <div id="acoesFoto" class="acoesFoto flex-wrap justify-content-center gap-3 mt-4" style="display: none;">
-    <button type="button" class="btn-acao btn-cancelar" id="outraFoto">Tirar outra</button>
-    <button type="submit" class="btn-acao btn-confirmar">Confirmar e continuar</button>
-  </div>
+      <div id="acoesFoto" class="acoesFoto flex-wrap justify-content-center gap-3 mt-4" style="display: none;">
+        <button type="button" class="btn-acao btn-cancelar" id="outraFoto">Tirar outra</button>
+        <button type="submit" class="btn-acao btn-confirmar">Confirmar e continuar</button>
+      </div>
 
-  <!-- Este campo será preenchido em base64 tanto para upload quanto para câmera -->
-  <input type="hidden" name="fotoBase64" id="fotoBase64">
-</form>
-
+      <!-- Este campo será preenchido em base64 tanto para upload quanto para câmera -->
+      <input type="hidden" name="fotoBase64" id="fotoBase64">
+    </form>
 
   </main>
   <footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
@@ -57,13 +56,25 @@
           <p>Todos os direitos reservados.</p>
       </div>
   </footer>
-  <script src="/js/shared/fotoPerfil.js"></script>
-  <script>
-  document.getElementById("formFoto").addEventListener("submit", function(event) {
-    event.preventDefault();
-    window.location.href = "/pages/candidatos/selecionar-areas.html";
-  });
-</script>
 
+  <script src="/js/shared/fotoPerfil.js"></script>
+
+  <script>
+    // Função para armazenar a foto no localStorage
+    document.getElementById("formFoto").addEventListener("submit", function(event) {
+      event.preventDefault();  // Impede o envio padrão do formulário
+
+      const fotoBase64 = document.getElementById("fotoBase64").value; // Pega a imagem em base64
+      if (fotoBase64) {
+        // Armazena a foto no localStorage
+        localStorage.setItem("fotoPerfil", fotoBase64);
+
+        // Redireciona para a próxima página (onde o perfil será exibido)
+        window.location.href = "/pages/candidatos/selecionar-areas.html";
+      } else {
+        alert("Por favor, selecione ou capture uma foto.");
+      }
+    });
+  </script>
 </body>
 </html>

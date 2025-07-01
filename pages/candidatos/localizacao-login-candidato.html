@@ -27,7 +27,7 @@
     <h1 class="mb-4 fs-2">Para saber as melhores oportunidades, digite sua região:</h1>
 
     <div class="form-container">
-      <form id="formLocalizacao" action="/candidato/localizacao" method="POST" novalidate>
+      <form id="formLocalidade" action="/candidato/localizacao" method="POST" novalidate>
         <div class="mb-3 text-start">
           <label for="localidade" class="form-label">Localidade</label>
 
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="d-grid">
-            <a href="/pages/candidatos/telefone.html" class="btn btn-primary">Continuar</a>
+            <button type="submit" class="btn btn-primary">Continuar</button>
         </div>
       </form>
     </div>
@@ -63,5 +63,24 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script src="/js/shared/localizacaoAPI.js"></script>
+ <script>
+    // Script para salvar a localidade no localStorage e redirecionar
+    document.getElementById('formLocalidade').addEventListener('submit', function(event) {
+      event.preventDefault(); // Previne o envio padrão do formulário
+
+      // Captura o valor da localidade
+      const localidade = document.getElementById('localidade').value;
+
+      if (localidade) {
+        // Armazenar a localidade no localStorage
+        localStorage.setItem('localidade', localidade);
+
+        // Redireciona para a próxima página (foto-perfil.html)
+        window.location.href = '/pages/candidatos/telefone.html';
+      } else {
+        alert("Por favor, preencha o campo de localidade.");
+      }
+    });
+  </script>
 </body>
 </html>

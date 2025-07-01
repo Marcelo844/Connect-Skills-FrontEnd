@@ -67,48 +67,42 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <div class="perfil-card bg-white p-4 rounded shadow-sm">
-      <div class="d-flex align-items-center perfil-header mb-4">
-        <img src="<%= fotoPerfil || 'https://via.placeholder.com/80' %>" alt="Foto" class="perfil-foto rounded-circle me-3">
-        <div>
-          <h4 class="mb-1"><%= nome || 'Usuário' %> <%= sobrenome || '' %></h4>
-          <p class="mb-1"><%= localidade || '' %></p>
-          <small class="d-block">+55 <%= ddd || '51' %> <%= telefone || 'xxxxxxxxxx' %></small>
-          <small class="d-block">Data de nascimento: <%= dataNascimento || 'não informada' %></small>
-        </div>
-        <a href="/candidato/editar-perfil" class="btn btn-primary btn-sm ms-auto">Editar perfil</a>
+   <div class="perfil-card bg-white p-4 rounded shadow-sm">
+    <div class="d-flex align-items-center perfil-header mb-4">
+      <img id="fotoPerfil" src="https://via.placeholder.com/80" alt="Foto" class="perfil-foto rounded-circle me-3">
+      <div>
+        <h4 class="mb-1" id="nomeSobrenome">Usuário</h4>
+        <p class="mb-1" id="localidade">Localidade</p>
+        <small class="d-block" id="telefone">+55 51 xxxxxxxxxx</small>
+        <small class="d-block" id="dataNascimento">Data de nascimento: não informada</small>
+      </div>
+      <a href="/candidato/editar-perfil" class="btn btn-primary btn-sm ms-auto">Editar perfil</a>
+    </div>
+
+    <div class="row gy-4">
+      <div class="col-md-6 col-12">
+        <h5 class="d-flex justify-content-between align-items-center">
+          Áreas de interesse
+          <a href="/candidato/areas" class="text-decoration-none" title="Editar áreas">
+            <i class="bi bi-pencil-square fs-6"></i>
+          </a>
+        </h5>
+        <ul id="areasInteresse" class="list-group">
+          <li class="list-group-item">Nenhuma área selecionada.</li>
+        </ul>
       </div>
 
-      <div class="row gy-4">
-        <div class="col-md-6 col-12">
-          <h5 class="d-flex justify-content-between align-items-center">
-            Áreas de interesse
-            <a href="/candidato/areas" class="text-decoration-none" title="Editar áreas">
-              <i class="bi bi-pencil-square fs-6"></i>
-            </a>
-          </h5>
-          <ul class="list-group">
-            <% if (areas && areas.length) { %>
-              <% areas.forEach(area => { %>
-                <li class="list-group-item"><%= area %></li>
-              <% }) %>
-            <% } else { %>
-              <li class="list-group-item">Nenhuma área selecionada.</li>
-            <% } %>
-          </ul>
-        </div>
-
-        <div class="col-md-6 col-12">
-          <h5>Minhas candidaturas</h5>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Curadoria Digital - Gerente de produtos
-              <a href="#" class="btn btn-outline-primary btn-sm">Acompanhar processos</a>
-            </li>
-          </ul>
-        </div>
+      <div class="col-md-6 col-12">
+        <h5>Minhas candidaturas</h5>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Curadoria Digital - Gerente de produtos
+            <a href="#" class="btn btn-outline-primary btn-sm">Acompanhar processos</a>
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
   </main> 
 
   <footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
@@ -118,5 +112,42 @@
       </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // Recupera os dados armazenados no localStorage
+  const nome = localStorage.getItem('nome');
+  const sobrenome = localStorage.getItem('sobrenome');
+  const localidade = localStorage.getItem('localidade');
+  const telefone = localStorage.getItem('telefone');  
+  const ddd = localStorage.getItem('ddd');
+  const dataNascimento = localStorage.getItem('dataNascimento');
+  const fotoPerfil = localStorage.getItem('fotoPerfil');  // Caso tenha armazenado a URL da foto
+  const areas = JSON.parse(localStorage.getItem('areas')) || [];
+
+  // Preencher os campos do perfil
+  document.getElementById('nomeSobrenome').textContent = `${nome || 'Usuário'} ${sobrenome || ''}`;
+  document.getElementById('localidade').textContent = localidade || 'Localidade não informada';
+  document.getElementById('telefone').textContent = `+55 ${ddd || '51'} ${telefone || 'xxxxxxxxxx'}`;
+  document.getElementById('dataNascimento').textContent = `Data de nascimento: ${dataNascimento || 'não informada'}`;
+  
+  // Foto de perfil
+  const fotoElement = document.getElementById('fotoPerfil');
+  if (fotoPerfil) {
+    document.getElementById("fotoPerfil").src = fotoPerfil;
+  }
+
+  // Preencher áreas de interesse
+  const areasContainer = document.getElementById('areasInteresse');
+  if (areas.length > 0) {
+    areas.forEach(area => {
+      const areaElement = document.createElement('li');
+      areaElement.classList.add('list-group-item');
+      areaElement.textContent = area;
+      areasContainer.appendChild(areaElement);
+    });
+  } else {
+    areasContainer.innerHTML = '<li class="list-group-item">Nenhuma área selecionada.</li>';
+  }
+</script>
+
 </body>
 </html>

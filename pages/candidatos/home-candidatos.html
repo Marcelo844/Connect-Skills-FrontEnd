@@ -76,11 +76,9 @@
     </div>
   </div>
 
-  <% if (nome && sobrenome && localidade) { %>
   <div class="container mt-5">
-    <h5 class="text-primary fw-bold">Olá, <%= nome %>!</h5>
+    <h5 id="greeting" class="text-primary fw-bold"></h5>
   </div>
-  <% } %>
   <!-- COMO FUNCIONA -->
   <section class="container my-5">
 <h3>
@@ -146,5 +144,18 @@
 </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // Recupera os dados armazenados no localStorage
+  const nome = localStorage.getItem('nome');
+  const sobrenome = localStorage.getItem('sobrenome');
+  const localidade = localStorage.getItem('localidade');  // Caso precise também da localidade
+
+  // Verifica se as informações estão presentes e mostra a saudação
+  if (nome && sobrenome) {
+    document.getElementById('greeting').innerHTML = `Olá, ${nome}!`;
+  } else {
+    document.getElementById('greeting').innerHTML = "Olá, usuário!";
+  }
+</script>
 </body>
 </html>

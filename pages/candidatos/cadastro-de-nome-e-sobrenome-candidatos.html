@@ -22,7 +22,7 @@
     <h1 class="text-center mb-3 fs-3 mt-5">Preencha os dados a seguir:</h1>
 
     <!-- Alterado o action do formulário -->
-    <form action="/pages/candidatos/localizacao-login-candidato.html" method="GET">
+    <form id="formCadastro" action="/pages/candidatos/localizacao-login-candidato.html" method="GET">
       <div class="mb-3">
         <label for="nome" class="form-label">Nome</label>
         <input type="text" class="form-control rounded-pill" id="nome" name="nome" placeholder="Ex: João" required>
@@ -53,5 +53,24 @@
   </footer>
 
   <script src="/js/shared/confirmacaoIdade.js"></script>
+  <script>
+  document.getElementById('formCadastro').addEventListener('submit', function(event) {
+    // Evita o envio imediato do formulário
+    event.preventDefault();
+
+    // Captura os valores dos campos
+    const nome = document.getElementById('nome').value;
+    const sobrenome = document.getElementById('sobrenome').value;
+    const dataNascimento = document.getElementById('dataNascimento').value;
+
+    // Armazena as informações no localStorage
+    localStorage.setItem('nome', nome);
+    localStorage.setItem('sobrenome', sobrenome);
+    localStorage.setItem('dataNascimento', dataNascimento);
+
+    // Agora, envia o formulário manualmente para o destino original (action)
+    window.location.href = '/pages/candidatos/localizacao-login-candidato.html';
+  });
+</script>
 </body>
 </html>
