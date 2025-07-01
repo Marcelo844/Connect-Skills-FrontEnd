@@ -14,34 +14,17 @@
     <a class="navbar-brand" href="/pages/empresas/home-empresas.html">
       <img src="/img/logo.png" class="logo-header" alt="Logo Connect Skills">
     </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/pages/empresas/home-empresas.html">Início</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/pages/empresas/vagas.html">Vagas</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="/pages/empresas/meu-perfil.html">Meu perfil</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">
-          Sair
-        </a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="/pages/empresas/home-empresas.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="/pages/empresas/vagas.html">Vagas</a></li>
+        <li class="nav-item"><a class="nav-link" href="/pages/empresas/meu-perfil.html">Meu perfil</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">Sair</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Modal de confirmação de logout -->
 <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -49,9 +32,7 @@
         <h5 class="modal-title" id="modalLogoutLabel">Confirmar logout</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
-      <div class="modal-body">
-        Tem certeza que deseja sair da sua conta?
-      </div>
+      <div class="modal-body">Tem certeza que deseja sair da sua conta?</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
         <form action="/logout" method="GET">
@@ -62,121 +43,259 @@
   </div>
 </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-  <main class="container py-5" style="max-width: 800px;">
-    <a href="/empresas/meu-perfil" class="text-decoration-none" title="Voltar ao perfil">
-      <i class="bi bi-x fs-6"></i>
-    </a>
-    <h2 class="text-center text-primary fw-bold mb-4 mt-4">Publicar vaga</h2>
+<main class="container py-5" style="max-width: 800px;">
+  <a href="/pages/empresas/vagas.html" class="text-decoration-none" title="Voltar ao perfil">
+    <i class="bi bi-x fs-6"></i>
+  </a>
+  <h2 class="text-center text-primary fw-bold mb-4 mt-4">Publicar vaga</h2>
 
   <form id="formPublicarVaga">
-      <div class="row mb-4">
-  <div class="col-md-6">
-    <label for="cargo" class="form-label">Cargo</label>
-    <input type="text" id="cargo" name="cargo" class="form-control" placeholder="Ex: Gerente de produtos" required>
-    <div class="invalid-feedback">Preencha o cargo.</div>
-  </div>
-
-  <div class="col-md-6">
-    <label for="tipo" class="form-label">Tipo de local de trabalho</label>
-    <select id="tipo" name="tipo" class="form-select" required>
-      <option value="" selected disabled>Selecione uma opção</option>
-      <option value="Presencial">Presencial</option>
-      <option value="Home Office">Home Office</option>
-      <option value="Híbrido">Híbrido</option>
-    </select>
-    <div class="invalid-feedback">Selecione o tipo de local de trabalho.</div>
-  </div>
-
-  <div class="col-md-6 mt-3">
-    <label for="escala" class="form-label">Escala de trabalho</label>
-    <input type="text" id="escala" name="escala" class="form-control" placeholder="Ex: Segunda a sexta, 8h às 17h" required>
-    <div class="invalid-feedback">Descreva a escala de trabalho.</div>
-  </div>
-
-  <div class="col-md-6 mt-3 d-flex align-items-end" id="campo-presencial-hibrido">
-    <div class="me-3" id="campoPresencial" style="display: none;">
-      <label for="diasPresenciais" class="form-label small">Dias presenciais</label>
-      <input type="number" class="form-control form-control-sm" id="diasPresenciais" name="diasPresenciais" min="0" max="7" style="width: 80px;" required>
-    </div>
-    <div id="campoHomeOffice" style="display: none;">
-      <label for="diasHomeOffice" class="form-label small">Dias home office</label>
-      <input type="number" class="form-control form-control-sm" id="diasHomeOffice" name="diasHomeOffice" min="0" max="7" style="width: 80px;" required>
-    </div>
-    <div id="erroDias" class="text-danger small mt-1 ms-3"></div>
-  </div>
-
-<div class="col-md-6 mt-3">
-  <label class="form-label">Salário (opcional)</label>
-  <div class="input-group">
-    <select class="form-select" id="moeda" name="moeda" style="max-width: 110px;">
-      <% const moedas = {
-        'BRL': 'R$', 'USD': 'US$', 'EUR': '€', 'GBP': '£', 'JPY': '¥', 'ARS': 'AR$', 'CAD': 'C$', 'AUD': 'A$', 
-        'CHF': 'CHF', 'CNY': '¥', 'INR': '₹', 'MXN': 'MX$', 'ZAR': 'R', 'KRW': '₩', 'SEK': 'kr', 'RUB': '₽'
-      }; %>
-      <% for (const codigo in moedas) { %>
-        <option value="<%= codigo %>" <%= codigo === 'BRL' ? 'selected' : '' %>><%= moedas[codigo] %></option>
-      <% } %>
-    </select>
-    <span class="input-group-text" id="simboloMoeda">R$</span>
-    <input type="text" id="salario" name="salario" class="form-control" placeholder="0,00" inputmode="decimal">
-  </div>
-  <div class="invalid-feedback">Informe um valor válido.</div>
-
-
-</div>
-  <div class="mb-4 mt-4">
-    <label for="descricao" class="form-label">Descrição da vaga</label>
-    <textarea class="form-control" name="descricao" id="descricao" rows="5" placeholder="Descreva as atividades, responsabilidades, benefícios etc." style="resize: none;" required></textarea>
-  </div>
-</div>
-
-</div>
-
-
-      <div class="mb-4">
-        <h5 class="fw-bold text-center">Áreas de atuação da vaga (máximo 3):</h5>
-        <div class="d-flex flex-wrap gap-2 justify-content-center">
-          <% const areas = ['Administração', 'Agropecuária / Agricultura', 'Comunicação / Jornalismo', 'Construção Civil', 'Design / Criação', 'Educação / Ensino', 'Engenharia', 'Eventos / Produção Cultural', 'Finanças / Contabilidade', 'Gastronomia / Alimentação', 'Hotelaria / Turismo', 'Jurídico', 'Logística', 'Marketing', 'Mecânica / Manutenção', 'Moda / Estilo', 'Meio Ambiente', 'Produção / Operacional', 'Recursos Humanos (RH)', 'Saúde', 'Segurança / Vigilância', 'Transporte / Motorista', 'Tecnologia da Informação']; %>
-          <% areas.forEach(area => { %>
-            <button type="button" class="btn btn-outline-primary area-btn"><%= area %></button>
-          <% }); %>
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="cargo" class="form-label">Cargo</label>
+        <input type="text" id="cargo" name="cargo" class="form-control" placeholder="Ex: Gerente de produtos" required>
+      </div>
+      <div class="col-md-6">
+        <label for="tipo" class="form-label">Tipo de local de trabalho</label>
+        <select id="tipo" name="tipo" class="form-select" required>
+          <option value="" selected disabled>Selecione uma opção</option>
+          <option value="Presencial">Presencial</option>
+          <option value="Home Office">Home Office</option>
+          <option value="Híbrido">Híbrido</option>
+        </select>
+      </div>
+      <div class="col-md-6 mt-3">
+        <label for="escala" class="form-label">Escala de trabalho</label>
+        <input type="text" id="escala" name="escala" class="form-control" placeholder="Ex: Segunda a sexta, 8h às 17h" required>
+      </div>
+      <div class="col-md-6 mt-3 d-flex align-items-end" id="campo-presencial-hibrido" style="display: none;">
+        <div class="me-3" id="campoPresencial" style="display: none;">
+          <label for="diasPresenciais" class="form-label small">Dias presenciais</label>
+          <input type="number" class="form-control form-control-sm" id="diasPresenciais" name="diasPresenciais" min="0" max="7" style="width: 80px;">
         </div>
-        <input type="hidden" name="areasSelecionadas" id="areasSelecionadas">
-        <div id="erroAreas" class="text-danger small mt-1"></div>
-      </div>
-
-      <div class="mb-4">
-        <h5 class="fw-bold text-center">Habilidades comportamentais que mais se encaixam à vaga (máximo 3):</h5>
-        <div class="d-flex flex-wrap gap-2 justify-content-center">
-          <% const habilidades = ['Comunicação eficaz', 'Pensamento crítico', 'Resolução de problemas', 'Tomada de decisão', 'Capacidade de aprender continuamente', 'Trabalho em equipe', 'Relacionamento interpessoal', 'Colaboração', 'Liderança', 'Proatividade', 'Flexibilidade/adaptabilidade', 'Gestão do tempo', 'Foco em resultados', 'Autoconfiança', 'Resiliência', 'Organização', 'Ética profissional', 'Responsabilidade']; %>
-          <% habilidades.forEach(hab => { %>
-            <button type="button" class="btn btn-outline-primary skill-btn"><%= hab %></button>
-          <% }); %>
+        <div id="campoHomeOffice" style="display: none;">
+          <label for="diasHomeOffice" class="form-label small">Dias home office</label>
+          <input type="number" class="form-control form-control-sm" id="diasHomeOffice" name="diasHomeOffice" min="0" max="7" style="width: 80px;">
         </div>
-        <input type="hidden" name="habilidadesSelecionadas" id="habilidadesSelecionadas">
-        <div id="erroHabilidades" class="text-danger small mt-1"></div>
       </div>
 
-      <div class="text-center mt-4">
-        <a href="/empresas/meu-perfil" class="btn btn-outline-danger px-5 fw-bold me-2">Cancelar</a>
-        <button type="submit" class="btn btn-outline-primary px-5 fw-bold">Continuar</button>
-      </div>
-    </form>
-  </main>
 
-<footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
+      <div class="col-md-6 mt-3">
+        <label class="form-label">Salário (opcional)</label>
+        <div class="input-group">
+          <select class="form-select" id="moeda" name="moeda" style="max-width: 110px;">
+            <option value="BRL" selected>R$</option>
+            <option value="USD">US$</option>
+            <option value="EUR">€</option>
+            <option value="GBP">£</option>
+            <option value="JPY">¥</option>
+            <option value="ARS">AR$</option>
+            <option value="CAD">C$</option>
+            <option value="AUD">A$</option>
+            <option value="CHF">CHF</option>
+            <option value="CNY">¥</option>
+            <option value="INR">₹</option>
+            <option value="MXN">MX$</option>
+            <option value="ZAR">R</option>
+            <option value="KRW">₩</option>
+            <option value="SEK">kr</option>
+            <option value="RUB">₽</option>
+          </select>
+          <span class="input-group-text" id="simboloMoeda">R$</span>
+          <input type="text" id="salario" name="salario" class="form-control" placeholder="0,00" inputmode="decimal">
+        </div>
+      </div>
+
+      <div class="mb-4 mt-4">
+        <label for="descricao" class="form-label">Descrição da vaga</label>
+        <textarea class="form-control" name="descricao" id="descricao" rows="5" required></textarea>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <h5 class="fw-bold text-center">Áreas de atuação da vaga (máximo 3):</h5>
+      <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <button type="button" class="btn btn-outline-primary area-btn">Administração</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Agropecuária / Agricultura</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Comunicação / Jornalismo</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Construção Civil</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Design / Criação</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Educação / Ensino</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Engenharia</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Eventos / Produção Cultural</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Finanças / Contabilidade</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Gastronomia / Alimentação</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Hotelaria / Turismo</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Jurídico</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Logística</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Marketing</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Mecânica / Manutenção</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Moda / Estilo</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Meio Ambiente</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Produção / Operacional</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Recursos Humanos (RH)</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Saúde</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Segurança / Vigilância</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Transporte / Motorista</button>
+        <button type="button" class="btn btn-outline-primary area-btn">Tecnologia da Informação</button>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <h5 class="fw-bold text-center">Habilidades comportamentais (máximo 3):</h5>
+      <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <button type="button" class="btn btn-outline-primary skill-btn">Comunicação eficaz</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Pensamento crítico</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Resolução de problemas</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Tomada de decisão</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Capacidade de aprender continuamente</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Trabalho em equipe</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Relacionamento interpessoal</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Colaboração</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Liderança</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Proatividade</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Flexibilidade/adaptabilidade</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Gestão do tempo</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Foco em resultados</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Autoconfiança</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Resiliência</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Organização</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Ética profissional</button>
+        <button type="button" class="btn btn-outline-primary skill-btn">Responsabilidade</button>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/empresas/meu-perfil" class="btn btn-outline-danger px-5 fw-bold me-2">Cancelar</a>
+      <button type="submit" class="btn btn-outline-primary px-5 fw-bold me-2">Continuar</button>
+    </div>
+  </form>
+</main>
+
+<footer class="p-3 text-center bg-primary text-white mt-5">
   <div class="container">
     <p class="mb-0">Connect Skills &copy; 2025</p>
     <p>Todos os direitos reservados.</p>
   </div>
 </footer>
 
-  <script src="/js/empresas/selecionarHabilidadeseAreas.js"></script>
-  <script src="/js/empresas/publicacaoVagasRequisitos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const selectMoeda = document.getElementById('moeda');
+  const simboloMoeda = document.getElementById('simboloMoeda');
+  const mapaMoedas = {
+    BRL: 'R$', USD: 'US$', EUR: '€', GBP: '£', JPY: '¥', ARS: 'AR$', CAD: 'C$', AUD: 'A$',
+    CHF: 'CHF', CNY: '¥', INR: '₹', MXN: 'MX$', ZAR: 'R', KRW: '₩', SEK: 'kr', RUB: '₽'
+  };
+  selectMoeda.addEventListener('change', function () {
+    simboloMoeda.textContent = mapaMoedas[this.value] || '';
+  });
+
+  // Selecionar áreas
+  const areaBtns = document.querySelectorAll('.area-btn');
+  let areasSelecionadas = [];
+
+  areaBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const area = btn.textContent;
+      if (btn.classList.contains('active')) {
+        btn.classList.remove('active');
+        areasSelecionadas = areasSelecionadas.filter(a => a !== area);
+      } else {
+        if (areasSelecionadas.length < 3) {
+          btn.classList.add('active');
+          areasSelecionadas.push(area);
+        } else {
+          alert('Você só pode selecionar no máximo 3 áreas.');
+        }
+      }
+    });
+  });
+
+  // Selecionar habilidades
+  const skillBtns = document.querySelectorAll('.skill-btn');
+  let habilidadesSelecionadas = [];
+
+  skillBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const habilidade = btn.textContent;
+      if (btn.classList.contains('active')) {
+        btn.classList.remove('active');
+        habilidadesSelecionadas = habilidadesSelecionadas.filter(h => h !== habilidade);
+      } else {
+        if (habilidadesSelecionadas.length < 3) {
+          btn.classList.add('active');
+          habilidadesSelecionadas.push(habilidade);
+        } else {
+          alert('Você só pode selecionar no máximo 3 habilidades.');
+        }
+      }
+    });
+  });
+
+  // Lógica de publicação da vaga
+  document.getElementById('formPublicarVaga').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const empresaNome = localStorage.getItem('empresaNome') || 'Empresa Anônima';
+    const fotoPerfil = localStorage.getItem('fotoPerfil') || '/img/logo.png';
+    
+    const vaga = {
+      cargo: document.getElementById('cargo').value,
+      tipo: document.getElementById('tipo').value,
+      escala: document.getElementById('escala').value,
+      salario: document.getElementById('salario').value,
+      moeda: document.getElementById('moeda').value,
+      descricao: document.getElementById('descricao').value,
+      diasPresenciais: document.getElementById('diasPresenciais')?.value || null,
+      diasHomeOffice: document.getElementById('diasHomeOffice')?.value || null,
+      areas: areasSelecionadas,
+      habilidades: habilidadesSelecionadas,
+      empresa: {
+        nome: empresaNome,
+        logo: fotoPerfil
+      }
+    };
+
+    const vagasSalvas = JSON.parse(localStorage.getItem('vagasPublicadas')) || [];
+    vagasSalvas.push(vaga);
+    localStorage.setItem('vagasPublicadas', JSON.stringify(vagasSalvas));
+
+    window.location.href = '/pages/empresas/vagas.html';
+  });
+
+  // Mostrar campos extras conforme tipo
+  const tipoSelect = document.getElementById('tipo');
+  const campoPresencial = document.getElementById('campoPresencial');
+  const campoHomeOffice = document.getElementById('campoHomeOffice');
+  const campoPresencialHibrido = document.getElementById('campo-presencial-hibrido');
+
+  tipoSelect.addEventListener('change', function () {
+    const tipo = tipoSelect.value;
+
+    if (tipo === 'Presencial') {
+      campoPresencialHibrido.style.display = 'flex';
+      campoPresencial.style.display = 'block';
+      campoHomeOffice.style.display = 'none';
+    } else if (tipo === 'Home Office') {
+      campoPresencialHibrido.style.display = 'flex';
+      campoPresencial.style.display = 'none';
+      campoHomeOffice.style.display = 'block';
+    } else if (tipo === 'Híbrido') {
+      campoPresencialHibrido.style.display = 'flex';
+      campoPresencial.style.display = 'block';
+      campoHomeOffice.style.display = 'block';
+    } else {
+      campoPresencialHibrido.style.display = 'none';
+    }
+  });
+
+  // Atualiza exibição ao carregar
+  window.addEventListener('DOMContentLoaded', () => {
+    tipoSelect.dispatchEvent(new Event('change'));
+  });
+</script>
+<script src="/js/empresas/selecionarHabilidadeseAreas.js"></script>
+<script src="/js/empresas/publicacaoVagasRequisitos.js"></script>
 </body>
 </html>
