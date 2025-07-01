@@ -105,8 +105,10 @@
         return;
       }
 
-      // Salva os dados se quiser em localStorage
-      // localStorage.setItem("areasSelecionadas", campoHidden.value);
+      atualizarSelecionados();
+
+      // Salva os dados no localStorage
+      localStorage.setItem("areasSelecionadas", campoHidden.value);
 
       // Redireciona para a home do candidato
       window.location.href = "/pages/candidatos/home-candidatos.html";

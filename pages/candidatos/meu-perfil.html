@@ -45,6 +45,7 @@
   </div>
 </nav>
 
+<!-- Modal de Logout -->
 <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -57,13 +58,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <form action="/logout" method="GET">
-          <button type="submit" class="btn btn-outline-primary">Sair</button>
-        </form>
+        <button type="button" class="btn btn-outline-primary" onclick="logout()">Sair</button>
       </div>
     </div>
   </div>
 </div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -76,29 +76,19 @@
         <small class="d-block" id="telefone">+55 51 xxxxxxxxxx</small>
         <small class="d-block" id="dataNascimento">Data de nascimento: não informada</small>
       </div>
-      <a href="/candidato/editar-perfil" class="btn btn-primary btn-sm ms-auto">Editar perfil</a>
+      <a href="/pages/candidatos/editar-perfil.html" class="btn btn-primary btn-sm ms-auto">Editar perfil</a>
     </div>
 
     <div class="row gy-4">
       <div class="col-md-6 col-12">
-        <h5 class="d-flex justify-content-between align-items-center">
+        <h5 class="d-flex justify-content-between align-items-center text-align">
           Áreas de interesse
-          <a href="/candidato/areas" class="text-decoration-none" title="Editar áreas">
+          <a href="/pages/candidatos/selecionar-areas.html" class="text-decoration-none" title="Editar áreas">
             <i class="bi bi-pencil-square fs-6"></i>
           </a>
         </h5>
         <ul id="areasInteresse" class="list-group">
           <li class="list-group-item">Nenhuma área selecionada.</li>
-        </ul>
-      </div>
-
-      <div class="col-md-6 col-12">
-        <h5>Minhas candidaturas</h5>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Curadoria Digital - Gerente de produtos
-            <a href="#" class="btn btn-outline-primary btn-sm">Acompanhar processos</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -113,31 +103,31 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  // Recupera os dados armazenados no localStorage
   const nome = localStorage.getItem('nome');
   const sobrenome = localStorage.getItem('sobrenome');
   const localidade = localStorage.getItem('localidade');
   const telefone = localStorage.getItem('telefone');  
   const ddd = localStorage.getItem('ddd');
   const dataNascimento = localStorage.getItem('dataNascimento');
-  const fotoPerfil = localStorage.getItem('fotoPerfil');  // Caso tenha armazenado a URL da foto
-  const areas = JSON.parse(localStorage.getItem('areas')) || [];
+  const fotoPerfil = localStorage.getItem('fotoPerfil');
 
-  // Preencher os campos do perfil
+  const areasSelecionadas = localStorage.getItem('areasSelecionadas');
+  const areas = areasSelecionadas ? areasSelecionadas.split(',') : [];
+
+
   document.getElementById('nomeSobrenome').textContent = `${nome || 'Usuário'} ${sobrenome || ''}`;
   document.getElementById('localidade').textContent = localidade || 'Localidade não informada';
   document.getElementById('telefone').textContent = `+55 ${ddd || '51'} ${telefone || 'xxxxxxxxxx'}`;
   document.getElementById('dataNascimento').textContent = `Data de nascimento: ${dataNascimento || 'não informada'}`;
-  
-  // Foto de perfil
+
   const fotoElement = document.getElementById('fotoPerfil');
   if (fotoPerfil) {
-    document.getElementById("fotoPerfil").src = fotoPerfil;
+    fotoElement.src = fotoPerfil;
   }
 
-  // Preencher áreas de interesse
   const areasContainer = document.getElementById('areasInteresse');
   if (areas.length > 0) {
+    areasContainer.innerHTML = '';
     areas.forEach(area => {
       const areaElement = document.createElement('li');
       areaElement.classList.add('list-group-item');
@@ -147,7 +137,15 @@
   } else {
     areasContainer.innerHTML = '<li class="list-group-item">Nenhuma área selecionada.</li>';
   }
+
 </script>
 
+<script>
+  function logout() {
+    sessionStorage.clear();
+    localStorage.removeItem('usuario');
+    window.location.href = "/pages/shared/home.html";
+  }
+</script>
 </body>
 </html>
