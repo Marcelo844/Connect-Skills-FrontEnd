@@ -1,4 +1,3 @@
-<!-- views/candidatos/vagas.ejs -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,135 +5,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vagas Disponíveis</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/css/shared/style.css">
   <link rel="stylesheet" href="/css/candidatos/vagas.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/pages/candidatos/home-candidatos.html">
-      <img src="/img/logo.png" class="logo-header" alt="Logo Connect Skills">
-    </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/pages/candidatos/home-candidatos.html">Início</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/pages/candidatos/vagas.html">Vagas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/pages/candidatos/meu-perfil.html">Meu perfil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">
-            Sair
-          </a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/pages/candidatos/home-candidatos.html">
+        <img src="/img/logo.png" class="logo-header" alt="Logo Connect Skills">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/pages/candidatos/home-candidatos.html">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/candidatos/vagas.html">Vagas</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/candidatos/meu-perfil.html">Meu perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">Sair</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLogoutLabel">Confirmar logout</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja sair da sua conta?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-outline-primary" onclick="logout()">Sair</button>
+  <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLogoutLabel">Confirmar logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">Tem certeza que deseja sair da sua conta?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-outline-primary" onclick="logout()">Sair</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <main class="container py-5">
     <h2 class="mb-4 mt-5">Vagas disponíveis</h2>
-
-    <% if (vagas.length === 0) { %>
-      <div class="alert alert-light text-center">Nenhuma vaga disponível no momento.</div>
-    <% } else { %>
-      <% vagas.forEach(vaga => { %>
-        <div class="card shadow-sm mb-4">
-            <div class="card-body d-flex align-items-start">
-              <img src="<%= vaga.empresa.logo %>" alt="Logo da empresa" class="rounded-circle me-3" width="60" height="60" style="object-fit: cover;">
-
-              <div class="flex-grow-1">
-                <h5 class="mb-0 fw-bold"><%= vaga.empresa.nome %></h5>
-                <p class="mb-1 text-muted"><%= vaga.cargo %> (<%= vaga.tipo %>)</p>
-                <p class="mb-1"><%= vaga.descricao %></p>
-                <p class="mb-1"><small class="text-muted">Vaga atua nas áreas de:</small></p>
-                <% vaga.areas.forEach(area => { %>
-                  <span class="badge rounded-pill border border-primary text-primary me-1"><%= area %></span>
-                <% }) %>
-              </div>
-            </div>
-            <div class="mt-3 text-center">
-  <button id="botaoIA" class="btn btn-outline-primary fw-bold botao-ia">Iniciar teste com a IA</button>
-</div>
-
-<!-- Container do iframe centralizado -->
-<div id="iframeContainer" style="display: none; justify-content: center; align-items: center; flex-direction: column; margin-top: 30px;">
-  <div style="width: 80%; max-width: 800px;">
-    <iframe 
-      src="https://www.stadyo.com/ai_assis/SUDXZZ7Rznv8IL09" 
-      style="width: 100%; height: 500px; border: none;" 
-      seamless>
-    </iframe>
-  </div>
-  <button id="fecharIA" class="btn btn-outline-danger mt-3 my-4">Fechar teste</button>
-</div>
-
-<script>
-  const botaoIA = document.getElementById("botaoIA");
-  const iframeContainer = document.getElementById("iframeContainer");
-  const fecharIA = document.getElementById("fecharIA");
-
-  botaoIA.addEventListener("click", function () {
-    iframeContainer.style.display = "flex";
-    botaoIA.style.display = "none";
-  });
-
-  fecharIA.addEventListener("click", function () {
-    iframeContainer.style.display = "none";
-    botaoIA.style.display = "inline-block";
-  });
-</script>
-
-          </div>
-        </div>
-      <% }) %>
-    <% } %>
+    <div id="listaVagas"></div>
   </main>
 
-  <footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
-      <div class="container">
-          <p class="mb-0">Connect Skills &copy; 2025</p>
-          <p>Todos os direitos reservados.</p>
-      </div>
+  <!-- IFRAME FIXO CENTRALIZADO -->
+  <div id="iframeContainer" style="display: none; justify-content: center; align-items: center; flex-direction: column; margin-top: 30px;">
+    <div style="width: 80%; max-width: 800px;">
+      <iframe 
+        src="https://www.stadyo.com/ai_assis/SUDXZZ7Rznv8IL09" 
+        style="width: 100%; height: 500px; border: none;" 
+        seamless>
+      </iframe>
+    </div>
+    <button id="fecharIA" class="btn btn-outline-danger mt-3 my-4">Fechar teste</button>
+  </div>
+
+  <footer class="p-3 text-center bg-primary text-white mt-5">
+    <div class="container">
+      <p class="mb-0">Connect Skills &copy; 2025</p>
+      <p>Todos os direitos reservados.</p>
+    </div>
   </footer>
-  <script>
-  function logout() {
-    sessionStorage.clear();
-    localStorage.removeItem('usuario');
-    window.location.href = "/pages/shared/home.html";
-  }
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+ <script>
+const vagasSimuladas = [
+  { empresa: { nome: "Administração Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Administração", tipo: "Presencial", descricao: "Atuação inicial na área de Administração, com suporte de equipe e possibilidade de efetivação.", areas: ["Administração"] },
+  { empresa: { nome: "Agropecuária Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Agropecuária", tipo: "Presencial", descricao: "Atuação inicial na área de Agropecuária / Agricultura, com suporte de equipe e possibilidade de efetivação.", areas: ["Agropecuária / Agricultura"] },
+  { empresa: { nome: "Comunicação Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Comunicação", tipo: "Presencial", descricao: "Atuação inicial na área de Comunicação / Jornalismo, com suporte de equipe e possibilidade de efetivação.", areas: ["Comunicação / Jornalismo"] },
+  { empresa: { nome: "Construção Civil Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Construção Civil", tipo: "Presencial", descricao: "Atuação inicial na área de Construção Civil, com suporte de equipe e possibilidade de efetivação.", areas: ["Construção Civil"] },
+  { empresa: { nome: "Design Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Design", tipo: "Presencial", descricao: "Atuação inicial na área de Design / Criação, com suporte de equipe e possibilidade de efetivação.", areas: ["Design / Criação"] },
+  { empresa: { nome: "Educação Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Educação", tipo: "Presencial", descricao: "Atuação inicial na área de Educação / Ensino, com suporte de equipe e possibilidade de efetivação.", areas: ["Educação / Ensino"] },
+  { empresa: { nome: "Engenharia Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Engenharia", tipo: "Presencial", descricao: "Atuação inicial na área de Engenharia, com suporte de equipe e possibilidade de efetivação.", areas: ["Engenharia"] },
+  { empresa: { nome: "Eventos Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Eventos", tipo: "Presencial", descricao: "Atuação inicial na área de Eventos / Produção Cultural, com suporte de equipe e possibilidade de efetivação.", areas: ["Eventos / Produção Cultural"] },
+  { empresa: { nome: "Finanças Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Finanças", tipo: "Presencial", descricao: "Atuação inicial na área de Finanças / Contabilidade, com suporte de equipe e possibilidade de efetivação.", areas: ["Finanças / Contabilidade"] },
+  { empresa: { nome: "Gastronomia Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Gastronomia", tipo: "Presencial", descricao: "Atuação inicial na área de Gastronomia / Alimentação, com suporte de equipe e possibilidade de efetivação.", areas: ["Gastronomia / Alimentação"] },
+  { empresa: { nome: "Hotelaria Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Hotelaria", tipo: "Presencial", descricao: "Atuação inicial na área de Hotelaria / Turismo, com suporte de equipe e possibilidade de efetivação.", areas: ["Hotelaria / Turismo"] },
+  { empresa: { nome: "Jurídico Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Jurídico", tipo: "Presencial", descricao: "Atuação inicial na área de Jurídico, com suporte de equipe e possibilidade de efetivação.", areas: ["Jurídico"] },
+  { empresa: { nome: "Logística Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Logística", tipo: "Presencial", descricao: "Atuação inicial na área de Logística, com suporte de equipe e possibilidade de efetivação.", areas: ["Logística"] },
+  { empresa: { nome: "Marketing Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Marketing", tipo: "Presencial", descricao: "Atuação inicial na área de Marketing, com suporte de equipe e possibilidade de efetivação.", areas: ["Marketing"] },
+  { empresa: { nome: "Mecânica Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Mecânica", tipo: "Presencial", descricao: "Atuação inicial na área de Mecânica / Manutenção, com suporte de equipe e possibilidade de efetivação.", areas: ["Mecânica / Manutenção"] },
+  { empresa: { nome: "Moda Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Moda", tipo: "Presencial", descricao: "Atuação inicial na área de Moda / Estilo, com suporte de equipe e possibilidade de efetivação.", areas: ["Moda / Estilo"] },
+  { empresa: { nome: "Meio Ambiente Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Meio Ambiente", tipo: "Presencial", descricao: "Atuação inicial na área de Meio Ambiente, com suporte de equipe e possibilidade de efetivação.", areas: ["Meio Ambiente"] },
+  { empresa: { nome: "Produção Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Produção", tipo: "Presencial", descricao: "Atuação inicial na área de Produção / Operacional, com suporte de equipe e possibilidade de efetivação.", areas: ["Produção / Operacional"] },
+  { empresa: { nome: "Recursos Humanos (RH) Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Recursos Humanos (RH)", tipo: "Presencial", descricao: "Atuação inicial na área de Recursos Humanos (RH), com suporte de equipe e possibilidade de efetivação.", areas: ["Recursos Humanos (RH)"] },
+  { empresa: { nome: "Saúde Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Saúde", tipo: "Presencial", descricao: "Atuação inicial na área de Saúde, com suporte de equipe e possibilidade de efetivação.", areas: ["Saúde"] },
+  { empresa: { nome: "Segurança Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Segurança", tipo: "Presencial", descricao: "Atuação inicial na área de Segurança / Vigilância, com suporte de equipe e possibilidade de efetivação.", areas: ["Segurança / Vigilância"] },
+  { empresa: { nome: "Transporte Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Transporte", tipo: "Presencial", descricao: "Atuação inicial na área de Transporte / Motorista, com suporte de equipe e possibilidade de efetivação.", areas: ["Transporte / Motorista"] },
+  { empresa: { nome: "Tecnologia da Informação Solutions", logo: "/img/logo.png" }, cargo: "Estagiário(a) em Tecnologia da Informação", tipo: "Presencial", descricao: "Atuação inicial na área de Tecnologia da Informação, com suporte de equipe e possibilidade de efetivação.", areas: ["Tecnologia da Informação"] }
+];
+
+const areasSelecionadas = localStorage.getItem("areasSelecionadas")?.split(",") || [];
+const vagasFiltradas = vagasSimuladas.filter(vaga =>
+  vaga.areas.some(area => areasSelecionadas.includes(area))
+);
+
+const lista = document.getElementById("listaVagas");
+const iframeContainer = document.getElementById("iframeContainer");
+const fecharIA = document.getElementById("fecharIA");
+
+if (vagasFiltradas.length === 0) {
+  lista.innerHTML = `<div class="alert alert-light text-center">Nenhuma vaga disponível para suas áreas de interesse no momento.</div>`;
+} else {
+  vagasFiltradas.forEach((vaga, index) => {
+    const card = document.createElement("div");
+    card.className = "card shadow-sm mb-4";
+    const idBotao = `botaoIA-${index}`;
+    card.innerHTML = `
+      <div class="card-body d-flex align-items-start">
+        <img src="${vaga.empresa.logo}" alt="Logo da empresa" class="rounded-circle me-3" width="60" height="60" style="object-fit: cover;">
+        <div class="flex-grow-1">
+          <h5 class="mb-0 fw-bold">${vaga.empresa.nome}</h5>
+          <p class="mb-1 text-muted">${vaga.cargo} (${vaga.tipo})</p>
+          <p class="mb-1">${vaga.descricao}</p>
+          <p class="mb-1"><small class="text-muted">Vaga atua nas áreas de:</small></p>
+          ${vaga.areas.map(area => `<span class="badge rounded-pill border border-primary text-primary me-1">${area}</span>`).join(" ")}
+        </div>
+      </div>
+      <div class="mt-3 text-center">
+        <button id="${idBotao}" class="btn btn-outline-primary fw-bold botao-ia">Iniciar teste com a IA</button>
+      </div>
+    `;
+    lista.appendChild(card);
+
+    setTimeout(() => {
+      const botao = document.getElementById(idBotao);
+      if (botao) {
+        botao.addEventListener("click", () => {
+          iframeContainer.style.display = "flex";
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        });
+      }
+    }, 50);
+  });
+}
+
+  fecharIA.addEventListener("click", () => {
+    iframeContainer.style.display = "none";
+  });
+
+function logout() {
+  sessionStorage.clear();
+  localStorage.removeItem('usuario');
+  window.location.href = "/pages/shared/home.html";
+}
 </script>
+
 </body>
 </html>
