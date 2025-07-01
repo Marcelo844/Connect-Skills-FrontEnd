@@ -50,16 +50,23 @@
         <h5 class="modal-title" id="modalLogoutLabel">Confirmar logout</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
-      <div class="modal-body">Tem certeza que deseja sair da sua conta?</div>
+      <div class="modal-body">
+        Tem certeza que deseja sair da sua conta?
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <form action="/logout" method="GET">
-          <button type="submit" class="btn btn-outline-primary">Sair</button>
-        </form>
+        <button type="button" class="btn btn-outline-primary" onclick="logout()">Sair</button>
       </div>
     </div>
   </div>
 </div>
+<script>
+  function logout() {
+    sessionStorage.clear();
+    localStorage.removeItem('usuario');
+    window.location.href = "/pages/shared/home.html";
+  }
+</script>
 
 <!-- Conteúdo principal -->
 <main class="container py-5">

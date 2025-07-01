@@ -23,9 +23,7 @@
   <h1 class="mb-4 fs-2">Para saber encontrar os melhores candidatos, digite sua região:</h1>
 
   <div class="form-container">
-    <form action="/pages/empresas/telefone-empresa.html" method="GET" id="formLocalizacao" novalidate>
-      <input type="hidden" name="usuario_id" value="<%= usuario_id %>">
-
+    <form id="formLocalizacao" novalidate>
       <div class="mb-3 text-start">
         <label for="localidade" class="form-label">Localidade</label>
 
@@ -54,7 +52,7 @@
   </div>
 </main>
 
-<footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
+<footer class="p-3 text-center bg-primary text-white mt-5">
   <div class="container">
     <p class="mb-0">Connect Skills &copy; 2025</p>
     <p>Todos os direitos reservados.</p>
@@ -62,5 +60,26 @@
 </footer>
 
 <script src="/js/shared/localizacaoAPI.js"></script>
+
+<script>
+    // Script para salvar a localidade no localStorage e redirecionar
+    document.getElementById('formLocalizacao').addEventListener('submit', function(event) {
+      event.preventDefault(); // Previne o envio padrão do formulário
+
+      // Captura o valor da localidade
+      const localidade = document.getElementById('localidade').value;
+
+      if (localidade) {
+        // Armazenar a localidade no localStorage
+        localStorage.setItem('localidade', localidade);
+
+        // Redireciona para a próxima página (telefone-empresa.html)
+        window.location.href = '/pages/empresas/telefone-empresa.html';
+      } else {
+        alert("Por favor, preencha o campo de localidade.");
+      }
+    });
+</script>
+
 </body>
 </html>

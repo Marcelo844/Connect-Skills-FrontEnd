@@ -13,132 +13,81 @@
 <body>
 
 <main>
-<!-- views/partials/header-empresa.ejs -->
-<nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/pages/empresas/home-empresas.html">
-      <img src="/img/logo.png" class="logo-header" alt="Logo Connect Skills">
-    </a>
+  <!-- HEADER -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/pages/empresas/home-empresas.html">
+        <img src="/img/logo.png" class="logo-header" alt="Logo Connect Skills">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/pages/empresas/home-empresas.html">Início</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/pages/empresas/vagas.html">Vagas</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="/pages/empresas/meu-perfil.html">Meu perfil</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">
-          Sair
-        </a>
-        </li>
-      </ul>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/pages/empresas/home-empresas.html">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/empresas/vagas.html">Vagas</a></li>
+          <li class="nav-item"><a class="nav-link" href="/pages/empresas/meu-perfil.html">Meu perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">Sair</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- Modal de confirmação de logout -->
-<div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLogoutLabel">Confirmar logout</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja sair da sua conta?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <form action="/logout" method="GET">
-          <button type="submit" class="btn btn-outline-primary">Sair</button>
-        </form>
+  <!-- MODAL LOGOUT -->
+  <div class="modal fade" id="modalLogout" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">Tem certeza que deseja sair da sua conta?</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-outline-primary" onclick="logout()">Sair</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
- 
-  <div class="perfil-card bg-white p-4 rounded shadow-sm">
-   <h2>Meu perfil</h2>
+  <!-- PERFIL -->
+  <div class="perfil-card bg-white p-4 rounded shadow-sm mt-5">
+    <h2>Meu perfil</h2>
     <div class="d-flex align-items-center perfil-header mb-4">
-    <img src="<%= empresa.foto_perfil %>" alt="Logo da Empresa" class="perfil-foto rounded-circle me-3">
+      <img id="fotoEmpresa" src="/img/avatar.png" alt="Logo da Empresa" class="perfil-foto rounded-circle me-3">
       <div>
-          <h2><%= empresa.nome_empresa %></h2>
-          <p><%= empresa.descricao %></p>
-          <p><%= empresa.localidade %></p>
-          <small><%= empresa.ddd %> <%= empresa.telefone %></small>
+        <h2 id="nomeEmpresa">Nome Empresa</h2>
+        <p id="descricaoEmpresa">Descrição</p>
+        <p id="localidadeEmpresa">Localidade</p>
+        <small id="telefoneEmpresa">+55 00 000000000</small>
       </div>
-      <a href="/empresa/editar-empresa" class="btn btn-primary btn-sm ms-auto">Editar perfil</a>
+      <a href="/pages/empresas/editar-empresa.html" class="btn btn-primary btn-sm ms-auto">Editar perfil</a>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <h5>Vagas Publicadas</h5> 
-      <a href="/empresas/publicar-vaga" class="text-decoration-none" title="Publicar vaga">
+      <h5>Vagas Publicadas</h5>
+      <a href="/pages/empresas/publicar-vaga.html" class="text-decoration-none" title="Publicar vaga">
         <i class="bi bi-plus-square fs-6"></i>
       </a>
     </div>
 
     <ul class="list-group">
-      <% if (vagasPublicadas.length > 0) { %>
-        <% vagasPublicadas.forEach(vaga => { %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span><%= vaga.cargo %></span>
-            <div class="d-flex gap-2">
-              <a href="/empresas/detalhes-da-vaga" class="btn btn-outline-primary btn-sm">
-                Ver detalhes
-              </a>
-
-              <% if (vaga.status === 'fechada') { %>
-                <button class="btn btn-secondary btn-sm" disabled>
-                  Vaga fechada
-                </button>
-              <% } else { %>
-                <form action="/empresa/fechar-vaga/<%= vaga.id %>" method="POST">
-                  <button type="submit" class="btn btn-outline-secondary btn-sm">
-                    Fechar vaga
-                  </button>
-                </form>
-              <% } %>
-2
-              <a href="/empresa/editar-vaga/<%= vaga.id %>" class="btn btn-outline-primary btn-sm">
-                <i class="bi bi-pencil-square fs-6"></i>
-              </a>
-              <button type="button" class="btn btn-outline-danger btn-sm" title="Excluir vaga" onclick="confirmarExclusao('<%= vaga.id %>')">
-                <i class="bi bi-trash"></i>
-              </button>
-            </div>
-          </li>
-        <% }) %>
-      <% } else { %>
-        <li class="list-group-item text-muted">Nenhuma vaga publicada ainda.</li>
-      <% } %>
+      <li class="list-group-item text-muted">Nenhuma vaga publicada ainda.</li>
     </ul>
   </div>
-  <!-- Modal de Confirmação -->
-<div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+
+</main>
+
+<!-- MODAL EXCLUSÃO -->
+<div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Confirmar exclusão</h5>
+        <h5 class="modal-title">Confirmar exclusão</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
-      <div class="modal-body">
-        Tem certeza que deseja excluir esta vaga?
-      </div>
+      <div class="modal-body">Tem certeza que deseja excluir esta vaga?</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
         <form id="formExcluirVaga" method="POST">
@@ -149,23 +98,40 @@
   </div>
 </div>
 
-</main>
-<script>
-  function confirmarExclusao(vagaId) {
-    const form = document.getElementById('formExcluirVaga');
-    form.action = `/empresa/excluir-vaga/${vagaId}`;
-    
-    const modal = new bootstrap.Modal(document.getElementById('modalConfirmacaoExclusao'));
-    modal.show();
-  }
-</script>
-
-<footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
+<!-- FOOTER -->
+<footer class="p-3 text-center bg-primary text-white mt-5">
   <div class="container">
     <p class="mb-0">Connect Skills &copy; 2025</p>
     <p>Todos os direitos reservados.</p>
   </div>
 </footer>
+
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Carregar informações do localStorage
+  const nomeEmpresa = localStorage.getItem('empresaNome');
+  const descricaoEmpresa = localStorage.getItem('empresaDescricao');
+  const localidade = localStorage.getItem('localidade');
+  const ddd = localStorage.getItem('ddd');
+  const telefone = localStorage.getItem('telefone');
+  const foto = localStorage.getItem('fotoPerfil');
+
+  // Preencher elementos da tela
+  document.getElementById("nomeEmpresa").textContent = nomeEmpresa || "Empresa";
+  document.getElementById("descricaoEmpresa").textContent = descricaoEmpresa || "Descrição da empresa";
+  document.getElementById("localidadeEmpresa").textContent = localidade || "Localidade não informada";
+  document.getElementById("telefoneEmpresa").textContent = `+55 ${ddd || '00'} ${telefone || '000000000'}`;
+
+  const img = document.getElementById("fotoEmpresa");
+  if (foto) img.src = foto;
+
+  function logout() {
+    localStorage.clear();
+    window.location.href = "/pages/shared/home.html";
+  }
+</script>
+
+
 </body>
 </html>

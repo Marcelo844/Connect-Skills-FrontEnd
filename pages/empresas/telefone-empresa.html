@@ -21,10 +21,7 @@
 <main class="d-flex flex-column align-items-center justify-content-center mt-5">
   <h3 class="text-center mb-4">Digite seu número de telefone:</h3>
 
-  <form action="/pages/empresas/foto-perfil-empresa.html" method="GET" id="formTelefone" novalidate>
-    <!-- Campo oculto com o ID do usuário -->
-    <input type="hidden" name="usuario_id" value="<%= usuario_id %>">
-
+  <form id="formTelefone" novalidate>
     <div class="form-card">
       <div class="mb-4">
         <label class="form-label fw-bold">Telefone</label>
@@ -56,12 +53,34 @@
   </form>
 </main>
 
-<footer class="p-3 text-center bg-primary text-white mt-5" style="background-color: #2F84F5;">
+<footer class="p-3 text-center bg-primary text-white mt-5">
   <div class="container">
     <p class="mb-0">Connect Skills &copy; 2025</p>
     <p>Todos os direitos reservados.</p>
   </div>
 </footer>
 <script src="/js/shared/numeroTelefone.js"></script>
+<script>
+// Script para salvar o número de telefone e DDD no localStorage
+document.getElementById('formTelefone').addEventListener('submit', function(event) {
+  event.preventDefault();  // Previne o envio padrão do formulário
+  
+  // Captura os valores do DDD e telefone
+  const ddd = document.getElementById('ddd').value;
+  const telefone = document.getElementById('telefone').value;
+
+  if (ddd && telefone) {
+      // Armazenar os valores no localStorage
+      localStorage.setItem('ddd', ddd);
+      localStorage.setItem('telefone', telefone);
+
+      // Redireciona para a próxima página (foto-perfil.html ou onde for necessário)
+      window.location.href = '/pages/empresas/foto-perfil-empresa.html';
+    } else {
+      alert("Por favor, preencha os campos de DDD e Telefone.");
+    }
+  });
+</script>
+
 </body>
 </html>
